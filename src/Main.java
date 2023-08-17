@@ -243,8 +243,8 @@ public class Main {
         descuentos[0][0]=10;
         descuentos[0][1]=5;
         /*usuarios*/
-        admin[0][0] = "1";/*admin_201800559*/
-        admin[0][1] = "1";/*201800559*/
+        admin[0][0] = "admin_201800559";/*admin_201800559*/
+        admin[0][1] = "201800559";/*201800559*/
         admin[0][2] = "admin";
         admin[0][3] = "Carlos";
         admin[0][4] = "Franco";
@@ -286,6 +286,7 @@ public class Main {
     }
     public static void ordeRenta(){
         mostrarCarros();
+        mostrarDescuento();
         menuCliente();
     }
     public static boolean comparacionNit(int nit){
@@ -304,6 +305,17 @@ public class Main {
         for (int i =0;i<vehiculos.length;i++){
             if(vehiculos[i][3]!=null){
                 System.out.println(vehiculos[i][0]+"   "+vehiculos[i][1]+"  "+vehiculos[i][2]+"   "+vehiculos[i][3]+"  "+vehiculos[i][4]+"   "+vehiculos[i][5]);
+                System.out.println("------------------------------------------");
+            }
+
+        }
+    }
+    public static void mostrarDescuento(){
+        System.out.println("-------------- descuentos------------------");
+        System.out.println("dias   descuento");
+        for (int i =0;i<descuentos.length;i++){
+            if(descuentos[i][0]!=0){
+                System.out.println(descuentos[i][0]+"   "+descuentos[i][1]+"%");
                 System.out.println("------------------------------------------");
             }
 
