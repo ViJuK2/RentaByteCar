@@ -233,12 +233,12 @@ public class Main {
 
     public static void datosPrueba(){
         /*Vehiculo*/
-        vehiculos[0][0]="marca";
-        vehiculos[0][1]="linea";
-        vehiculos[0][2]="modelo";
-        vehiculos[0][3]="placa";
+        vehiculos[0][0]="adf";
+        vehiculos[0][1]="as";
+        vehiculos[0][2]="asdfa";
+        vehiculos[0][3]="plzxvbzaca";
         vehiculos[0][4]= String.valueOf(120);
-        vehiculos[0][5]="no";
+        vehiculos[0][5]=String.valueOf(true);
         /*descuento*/
         descuentos[0][0]=10;
         descuentos[0][1]=5;
@@ -285,7 +285,8 @@ public class Main {
 
     }
     public static void ordeRenta(){
-
+        mostrarCarros();
+        menuCliente();
     }
     public static boolean comparacionNit(int nit){
         boolean existe=false;
@@ -297,5 +298,15 @@ public class Main {
         }
         return existe;
     }
+    public static void mostrarCarros(){
+        System.out.println("-------------- Vehiculos------------------");
+        System.out.println("Marca   Linea     Modelo      Placa      Dias       arriendo");
+        for (int i =0;i<vehiculos.length;i++){
+            if(vehiculos[i][3]!=null){
+                System.out.println(vehiculos[i][0]+"   "+vehiculos[i][1]+"  "+vehiculos[i][2]+"   "+vehiculos[i][3]+"  "+vehiculos[i][4]+"   "+vehiculos[i][5]);
+                System.out.println("------------------------------------------");
+            }
 
+        }
+    }
 }
