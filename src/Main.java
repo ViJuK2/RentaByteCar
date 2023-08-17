@@ -11,28 +11,30 @@ public class Main {
     public static void  login(){
         System.out.println("ingrese el nombre de usuario");
         Scanner sc = new Scanner(System.in);
-        String datos = sc.nextLine();
-        for (int i =0; i< admin.length;i++) {
-            if (admin[i][0] != null && admin[i][0].equals(datos)) {
-                if (admin[i][2] != null) {
-                    System.out.println("Ingrese la contraseña");
-                    String clave = sc.nextLine();
-                    if (admin[i][1].equals(clave)) {
-                        menuAdmin();
-                        break;
+        try {
+            String datos = sc.nextLine();
+            for (int i =0; i< admin.length;i++) {
+                if (admin[i][0] != null && admin[i][0].equals(datos)) {
+                    if (admin[i][2] != null) {
+                        System.out.println("Ingrese la contraseña");
+                        String clave = sc.nextLine();
+                        if (admin[i][1].equals(clave)) {
+                            menuAdmin();
+                            break;
+                        } else {
+                            System.out.println("Clave equivocada");
+                            sc.close();
+                            login();
+                        }
                     } else {
-                        System.out.println("Clave equivocada");
-                        sc.close();
-                        login();
+                        menuCliente();
+                        break;
                     }
-                } else {
-                    menuCliente();
-                    break;
                 }
-            }else{
-                System.out.println("no existe el usuario");
-                login();
             }
+        }catch (Exception ie){
+            System.out.println("Error de usuario");
+            login();
         }
     }
     public static void menuAdmin() {
@@ -42,7 +44,7 @@ public class Main {
         System.out.println("2.Agregar descuento");
         System.out.println("3.Realizar Reportes");
         System.out.println("4.Mostrar usuarios");
-        System.out.println("5.Regresar al menu");
+        System.out.println("5.cerrar sesion");
         System.out.println("Escoja el numero de la opcion");
         int opcion=0;
         try {
@@ -73,16 +75,43 @@ public class Main {
             menuAdmin();
         }
     }
-    public static int menuCliente(){
-        int opcion=0;
+    public static void menuCliente(){
+        Scanner scC = new Scanner(System.in);
         System.out.println("Menu Cliente");
         System.out.println("1.Registrase");
         System.out.println("2.Iniciar  sesion");
         System.out.println("3.Realizar rezerva");
         System.out.println("4.Mostrar usuarios");
-        System.out.println("5.Regresar al menu");
+        System.out.println("5.cerrar Seccion");
         System.out.println("Escoja el numero de la opcion");
-        return opcion;
+        int opcion=0;
+        try {
+            opcion = scC.nextInt();
+            switch (opcion){
+                case 1:
+                    registro();
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+
+                    break;
+                case 4:
+                    mostrarUsers();
+                    break;
+                case 5:
+                    login();
+                    break;
+                default:
+                    System.out.println("Escoja el numero de la opcion correspondiente");
+                    menuCliente();
+                    break;
+            }
+        } catch (Exception ie) {
+            System.out.println("Escoja el numero de la opcion correcta");
+            menuCliente();
+        }
     }
     /*
     *           Administracion de vehiculos
@@ -116,6 +145,7 @@ public class Main {
                         vehiculos[i][4]=String.valueOf(alquiler);
                         vehiculos[i][5]="no";
                         menuAdmin();
+                        break;
                     }
                 }
 
@@ -226,5 +256,46 @@ public class Main {
     /*
      *           Administracion de cliente
      * */
+    public static void registro(){
+        Scanner usua= new Scanner(System.in);
+       try {
+           System.out.println("ingrese su nit");
+           int nit = usua.nextInt();
+           if(comparacionNit(nit)!=true){
+               usua.nextLine();
+               System.out.println("ingrese su nombre");
+               String nombre = usua.nextLine();
+
+               System.out.println("ingrese su apellido");
+               String apellido = usua.nextLine();
+               for(int i =0;i<admin.length;i++){
+                   if(admin[i][0]==null){
+                       admin[i][0]=String.valueOf(nit);
+                       admin[i][3]=nombre;
+                       admin[i][4]=apellido;
+                       menuCliente();
+                       break;
+                   }
+               }
+           }else {registro();}
+       }catch (Exception ie){
+           System.out.println("ingrese su nit solo con numeros");
+           registro();
+       }
+
+    }
+    public static void ordeRenta(){
+
+    }
+    public static boolean comparacionNit(int nit){
+        boolean existe=false;
+        for(int i=0;i<admin.length;i++){
+            if (  admin[i][0]!=null && Integer.valueOf(admin[i][0])==nit){
+                System.out.println("nit ya existente");
+                existe=true;
+            }
+        }
+        return existe;
+    }
 
 }
