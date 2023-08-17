@@ -92,10 +92,10 @@ public class Main {
                     registro();
                     break;
                 case 2:
-
+                    login();
                     break;
                 case 3:
-
+                    ordeRenta();
                     break;
                 case 4:
                     mostrarUsers();
